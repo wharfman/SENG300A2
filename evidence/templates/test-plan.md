@@ -56,4 +56,12 @@ Doesn't apply. Both sequences are about cancelling (R3–R5).
 
 ## Changes after code inspection
 
-(Empty until method bodies are inspected.)
+### R1 - Valid Times
+
+**Added: invalid requests shouldn't use up an ID.** 
+In `create`, `nextId` is only called after the time check passes, so a rejected request shouldn't consume an ID. We added a check for this to the optional sequence: after an INVALID_TIME request, the next valid create in the same fixture should get `created-1`. R1 doesn't state this directly, so we're treating it as a sanity check rather than a rule test.
+
+**Plan Changes:**
+- Added the `created-1` ID check after an invalid request in the optional sequence.
+
+
