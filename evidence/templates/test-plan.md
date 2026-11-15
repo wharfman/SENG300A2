@@ -127,4 +127,13 @@ In `create`, `nextId` is only called after the time check passes, so a rejected 
 **Plan Changes:**
 - Added the `created-1` ID check after an invalid request in the optional sequence.
 
+### R2 - Room Conflicts
+
+**Changed: a conflict shouldn't use up an ID either.**
+Before reading the code we didn't know if a CONFLICT would use up an ID, since the rules don't say. That's why step 3 of our sequence only expected "a new ID" and the CREATED cases only expected the ID to not be null. In `create`, `nextId` only gets called after the conflict loop finishes without finding anything, so a rejected request can't use one up. So step 3 should get exactly `created-2`, and the CREATED cases should get exactly `created-1` since they're the first booking made in a fresh fixture.
+
+**Plan Changes:**
+- Sequence step 3 now expects `created-2` instead of just a new ID.
+- CREATED cases now expect `created-1` instead of just a non-null ID.
+
 
