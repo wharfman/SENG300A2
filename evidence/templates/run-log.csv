@@ -7,3 +7,8 @@ r4-pit,.\mvnw.cmd org.pitest:pitest-maven:mutationCoverage,not recorded,no,,,,30
 r3-coverage (interim),.\mvnw.cmd clean verify,75bbbb6,yes,65,0,0,31,31,20,20,n/a,evidence/runs/r3-coverage/index.html
 r5-tests,.\mvnw.cmd -Dtest=R5SavedDataAndNotificationsTest test,not recorded,not verified,7,0,0,,,,,n/a,target/surefire-reports
 r5-pit,.\mvnw.cmd org.pitest:pitest-maven:mutationCoverage,not recorded,not verified,,,,31,31,,,20 killed; 0 survived; 0 no coverage,target/pit-reports/index.html
+bug-reference (detecting test),".\mvnw.cmd clean test -Dtest=R3PermissionAndStateTest#nonOwnerIsDeniedWhateverTheStateOrTime",8a6d08b,yes,5,0,0,,,,,n/a,evidence/runs/bug-reference/detecting-test-output.txt
+bug-faulty (detecting test),".\mvnw.cmd clean test -Dtest=R3PermissionAndStateTest#nonOwnerIsDeniedWhateverTheStateOrTime",7fd24a5,yes,2,3,0,,,,,n/a,evidence/runs/bug-faulty/detecting-test-output.txt
+bug-faulty (full suite),.\mvnw.cmd clean test,7fd24a5,yes,60,5,0,,,,,n/a,evidence/runs/bug-faulty/full-suite-output.txt
+bug-repaired (detecting test),".\mvnw.cmd clean test -Dtest=R3PermissionAndStateTest#nonOwnerIsDeniedWhateverTheStateOrTime",da4278a,yes,5,0,0,,,,,n/a,evidence/runs/bug-repaired/detecting-test-output.txt
+bug-repaired (full suite),.\mvnw.cmd clean test,da4278a,yes,65,0,0,,,,,n/a,evidence/runs/bug-repaired/full-suite-output.txt
