@@ -98,9 +98,24 @@ Doesn't apply. R1 is only about creating bookings.
 
 Doesn't apply. R2 is just about creating bookings.
 
+### R4 - Cancellation Time
+
+R4 allows the owner to cancel an ACTIVE booking if at least 120 minutes remain before its start. TestFixtures uses a fixed clock, so the times below are minutes from now.
+
 | Owner | State | Time remaining | Expected result |
 | --- | --- | --- | --- |
+| Correct owner | ACTIVE | 0 | TOO_LATE |
+| Correct owner | ACTIVE | 1 | TOO_LATE |
+| Correct owner | ACTIVE | 119 | TOO_LATE |
+| Correct owner | ACTIVE | 120 | CANCELLED |
+| Correct owner | ACTIVE | 121 | CANCELLED |
+| Correct owner | ACTIVE | 240 | CANCELLED |
 
+The 119, 120 and 121-minute cases check both sides of the cutoff and the exact boundary.
+
+For TOO_LATE, the booking must stay ACTIVE and no notification should be requested. For CANCELLED, the saved booking must change to CANCELLED and exactly one notification should be requested.
+
+Two additional cases check that unrelated bookings are unchanged after a successful cancellation at 120 minutes and a rejected cancellation at 119 minutes.
 
 ## Two action sequences
 

@@ -2,3 +2,5 @@ checkpoint,command,git_commit,working_tree_clean,passed,failed,skipped,covered_l
 starter-coverage,.\mvnw.cmd clean verify,2999086,yes,3,0,0,22,31,7,20,n/a,evidence/runs/starter-coverage/index.html
 r1-coverage (interim),.\mvnw.cmd clean verify,4df80ab,yes,24,0,0,28,31,14,20,n/a,evidence/runs/r1-coverage/index.html
 r2-coverage (interim),.\mvnw.cmd clean verify,4a7e19c,yes,45,0,0,29,31,18,20,n/a,evidence/runs/r2-coverage/index.html
+r4-tests,.\mvnw.cmd -Dtest=R4CancellationTimeTest test,not recorded,not verified,8,0,0,,,,,n/a,target/surefire-reports
+r4-pit,.\mvnw.cmd org.pitest:pitest-maven:mutationCoverage,not recorded,no,,,,30,31,,,18 killed; 1 survived; 1 no coverage,target/pit-reports/index.html
