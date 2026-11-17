@@ -1,3 +1,56 @@
+# SENG 300 A2 - Group 11 submission
+
+## Group
+
+Group number: 11
+
+| Name | Student ID |
+| --- | --- |
+| Gavin Kyle | 30196910 |
+| Matthew Hajas | 30213765 |
+| Omar Almishri | 30246524 |
+| Ethan Bryant | 30234163 |
+
+## What's in the project
+
+| Item | Location |
+| --- | --- |
+| Reference code (unchanged from the starter) | `src/main/java/ca/ucalgary/seng300/booking/` |
+| Core tests R1-R5 | `src/test/java/ca/ucalgary/seng300/booking/R1ValidTimesTest.java` to `R5SavedDataAndNotificationsTest.java` |
+| Part 6 extension (Option B) | `src/test/java/ca/ucalgary/seng300/booking/FailingSaveRepository.java`, `FailedSaveTest.java` |
+| Part 5 bug repair | Branch `investigate-bug` (never merged) and `evidence/bug/repair.patch` |
+| Shared report (Parts 1-6) | `evidence/report/Shared_report.pdf` |
+| Individual explanations (Part 7) | `evidence/report/30196910_GavinKyle.pdf`, `evidence/report/30213765_MatthewHajas.pdf` |
+| Planning and investigation records | `evidence/templates/` (test plan, test map, run log, coverage gaps, mutations, defect record, contributions) |
+| Saved tool reports | `evidence/runs/` (JaCoCo, PIT and bug-run output; included in the ZIP separately because Git ignores it) |
+
+## Run commands
+
+Run from the `booking-tests` folder with JDK 17. On macOS or Linux, use `./mvnw` instead of `.\mvnw.cmd` (run `chmod +x mvnw` first).
+
+| Task | Command | Output |
+| --- | --- | --- |
+| All tests (core + extension) | `.\mvnw.cmd clean test` | `target/surefire-reports/` |
+| Coverage (JaCoCo) | `.\mvnw.cmd clean verify` | `target/site/jacoco/index.html` |
+| Mutation testing (PIT) | `.\mvnw.cmd test-compile org.pitest:pitest-maven:mutationCoverage` | `target/pit-reports/index.html` |
+| One test class | `.\mvnw.cmd -Dtest=R3PermissionAndStateTest test` | `target/surefire-reports/` |
+| Part 6 extension only | `.\mvnw.cmd -Dtest=FailedSaveTest test` | `target/surefire-reports/` |
+| Part 5 detecting test | `.\mvnw.cmd clean test "-Dtest=R3PermissionAndStateTest#nonOwnerIsDeniedWhateverTheStateOrTime"` | `target/surefire-reports/` |
+
+Expected results on the reference: 74 tests, 0 failures; `BookingService` 31/31 lines and 20/20 branches; PIT 20 mutants, 20 killed.
+
+To see the Part 5 bug and repair:
+
+```powershell
+git switch investigate-bug
+git log --oneline -3     # faulty version 7fd24a5, repair da4278a
+git switch main
+```
+
+Without the branch, apply the supplied bug to a copy with `git apply ..\faulty-version\buggy-version.patch`, and the fix with `git apply evidence\bug\repair.patch`.
+
+---
+
 # SENG 300 testing starter
 
 ## Required language
