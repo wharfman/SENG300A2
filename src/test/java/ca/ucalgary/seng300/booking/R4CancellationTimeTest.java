@@ -1,4 +1,3 @@
-
 package ca.ucalgary.seng300.booking;
 
 import org.junit.jupiter.api.DisplayName;
