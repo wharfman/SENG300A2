@@ -116,9 +116,6 @@ We'll check more than just the status for DENIED and INACTIVE:
 - Any other bookings should be unchanged too.
 - There should be no notification requests (R5).
 
-
-## Cancellation decision table
-
 ## Cancellation decision table
 
 ### R1 - Valid Times
@@ -166,6 +163,34 @@ The 119, 120 and 121-minute cases check both sides of the cutoff and the exact b
 For TOO_LATE, the booking must stay ACTIVE and no notification should be requested. For CANCELLED, the saved booking must change to CANCELLED and exactly one notification should be requested.
 
 Two additional cases check that unrelated bookings are unchanged after a successful cancellation at 120 minutes and a rejected cancellation at 119 minutes.
+
+### R5 - Saved Data and Notifications
+
+R5 checks that booking creation and cancellation correctly update the repository and notification requests. Checking only the returned status is not enough, since the service could return the correct status but save the wrong booking or send an extra notification.
+
+The main input groups are:
+- Successful cancellation: ACTIVE booking, correct owner, at least 120 minutes remaining.
+- Rejected cancellation: non-owner, inactive booking, or less than 120 minutes remaining.
+- Successful creation: valid times and no conflict.
+- Rejected creation: invalid times or an ACTIVE booking conflict.
+- Repeated requests: cancel twice, or attempt cancellation as a non-owner before the owner.
+- Other bookings: verify that unrelated bookings remain unchanged.
+
+| Case | Expected response | Repository | Notifications |
+| --- | --- | --- | --- |
+| Successful cancellation | CANCELLED | b1 saved as CANCELLED | One request for b1 |
+| Non-owner cancellation | DENIED | Unchanged | None |
+| Inactive cancellation | INACTIVE | Unchanged | None |
+| Late cancellation | TOO_LATE | Unchanged | None |
+| Valid creation | CREATED | One new ACTIVE booking | None |
+| Invalid creation | INVALID_TIME | Unchanged | None |
+| Conflicting creation | CONFLICT | Unchanged | None |
+
+The tests should compare the complete saved booking, not just its state, to detect unintended changes to the ID, room, owner or times. Notification checks should verify the cancelled booking and the number of requests.
+
+The two required cancellation sequences are also covered under R3. R5 focuses on their saved-state and notification effects, particularly that cancelling twice produces only one notification request.
+
+Unrelated bookings must remain unchanged after successful or rejected operations. Each test uses a fresh TestFixtures instance and the supplied fixed clock.
 
 ## Two action sequences
 
