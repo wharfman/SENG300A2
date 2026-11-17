@@ -4,3 +4,4 @@ r1-coverage (interim),.\mvnw.cmd clean verify,4df80ab,yes,24,0,0,28,31,14,20,n/a
 r2-coverage (interim),.\mvnw.cmd clean verify,4a7e19c,yes,45,0,0,29,31,18,20,n/a,evidence/runs/r2-coverage/index.html
 r4-tests,.\mvnw.cmd -Dtest=R4CancellationTimeTest test,not recorded,not verified,8,0,0,,,,,n/a,target/surefire-reports
 r4-pit,.\mvnw.cmd org.pitest:pitest-maven:mutationCoverage,not recorded,no,,,,30,31,,,18 killed; 1 survived; 1 no coverage,target/pit-reports/index.html
+r3-coverage (interim),.\mvnw.cmd clean verify,75bbbb6,yes,65,0,0,31,31,20,20,n/a,evidence/runs/r3-coverage/index.html
