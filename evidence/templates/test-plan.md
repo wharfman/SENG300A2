@@ -221,4 +221,12 @@ Before reading the code we didn't know if a CONFLICT would use up an ID, since t
 - Sequence step 3 now expects `created-2` instead of just a new ID.
 - CREATED cases now expect `created-1` instead of just a non-null ID.
 
+### R3 - Permission and State
+
+**Changed: check the whole booking that gets sent to the notifier.**
+Before reading the code we only planned to check which booking the notification was for (its ID), since the rules don't say what the notification should contain. In `cancel`, the booking passed to `notifier.cancellationRequested` is the same one that gets saved, `booking.withState(BookingState.CANCELLED)`. So in both sequences the notification request should be exactly b1 with its state changed to CANCELLED, with the same ID, room, owner and times. Checking the whole record would also catch the service notifying with the old ACTIVE booking, which only checking the ID would miss.
+
+**Plan Changes:**
+- Both sequences now expect the notification request to equal b1 in the CANCELLED state, instead of just having b1's ID.
+
 
