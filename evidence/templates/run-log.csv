@@ -12,3 +12,6 @@ bug-faulty (detecting test),".\mvnw.cmd clean test -Dtest=R3PermissionAndStateTe
 bug-faulty (full suite),.\mvnw.cmd clean test,7fd24a5,yes,60,5,0,,,,,n/a,evidence/runs/bug-faulty/full-suite-output.txt
 bug-repaired (detecting test),".\mvnw.cmd clean test -Dtest=R3PermissionAndStateTest#nonOwnerIsDeniedWhateverTheStateOrTime",da4278a,yes,5,0,0,,,,,n/a,evidence/runs/bug-repaired/detecting-test-output.txt
 bug-repaired (full suite),.\mvnw.cmd clean test,da4278a,yes,65,0,0,,,,,n/a,evidence/runs/bug-repaired/full-suite-output.txt
+final-coverage,.\mvnw.cmd clean verify,COMMIT_ID,yes,74,0,0,31,31,20,20,n/a,evidence/runs/final-coverage/index.html
+pre-mutation,.\mvnw.cmd test-compile org.pitest:pitest-maven:mutationCoverage,36b14f4,yes,72,0,0,31,31,,,"20 generated: 20 killed; 0 survived; 0 no coverage; 0 timed out; 0 run/memory errors; 0 non-viable",evidence/runs/pre-mutation/index.html
+final-mutation,.\mvnw.cmd test-compile org.pitest:pitest-maven:mutationCoverage,COMMIT_ID,yes,74,0,0,31,31,,,"20 generated: 20 killed; 0 survived; 0 no coverage; 0 timed out; 0 run/memory errors; 0 non-viable",evidence/runs/final-mutation/index.html
